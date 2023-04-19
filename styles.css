@@ -1,0 +1,129 @@
+* {
+  padding: 0;
+  color: white;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  min-width: 100%;
+  margin: 0;
+}
+
+.player-one-section, .player-two-section {
+  display: flex;
+  width: 100px;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  background-color: #2ccde6;
+  font-size: 40px
+}
+
+.game-holder {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.classic-container {
+  display: flex;
+  width: 350px; 
+  height: 200px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: darkgreen;
+  border-radius: 20px;
+}
+
+ .classic-container:hover {
+  background-color: #e0a510;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.difficult-container:hover {
+  background-color: #2424d3;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.difficult-container {
+  display: flex;
+  width: 350px; 
+  height: 290px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: darkgreen;
+  border-radius: 20px;
+}
+
+.game-selector {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  width: 400px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  width: 500px;
+  font-size: 30px;
+  background-color: rgb(60, 166, 60);
+  align-items: center;
+}
+
+.classic-buttons {
+  display: flex;
+  width: 500px;
+  height: 200px;
+  justify-content: space-around;
+}
+
+.advanced-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+  height: 200px;
+}
+
+button {
+  background-color: rgb(60, 166, 60);
+  border: none; 
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+main { 
+  color: #2ccde6;
+  background-color:   rgb(60, 166, 60);
+}
+
+img { 
+  width: 100px;
+  height: 150px;
+}
+
+header {
+  font-size: 45px;
+}
+
+.classic-info {
+  width: 231px;
+  font-size: 30px
+}
+
+.difficult-info {
+  width: 300px;
+  font-size: 30px
+}
