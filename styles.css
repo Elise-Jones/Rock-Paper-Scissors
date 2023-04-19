@@ -111,11 +111,11 @@ main {
 
 img { 
   width: 100px;
-  height: 150px
+  height: 150px;
 }
 
 header {
-  font-size: 35px;
+  font-size: 45px;
 }
 
 .classic-info {
