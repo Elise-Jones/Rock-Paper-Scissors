@@ -49,10 +49,6 @@ function capturePlayersChoices(event){
   return currentGame
 }
 
-function clearGame(){
-  currentGame.gameBoard = []
-  return currentGame.gameBoard
-}
 function updateGameBoard(){
  
   currentGame.gameBoard.push(currentGame.player1.choice, currentGame.player2.choice)
