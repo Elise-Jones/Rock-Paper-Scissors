@@ -2,11 +2,10 @@
 var classicChoices = ["rock", "paper", "scissors"];
 var advancedChoices = ["rock", "paper", "scissors", "lizard", "alien"];
 var currentGame;
-var gameBoardChoices = []
 
 
-//EVENT LISTENERS
 
+//UPDATING THE DATA MODEL
 function createPlayer (name, token){
   var player = {
     name: name,
@@ -17,11 +16,11 @@ function createPlayer (name, token){
   return player;
 }
 
-function createGame(gameBoardChoices) {
+function createGame() {
   currentGame = {
     player1: createPlayer("sun", "🌞"),
     player2: createPlayer("earth", "🌏"),
-    gameBoard: gameBoardChoices,
+    gameBoard: [],
     gameType: null,
     draw: false,
   }
@@ -48,17 +47,18 @@ function capturePlayersChoices(event){
     currentGame.player1.choice = event
     currentGame.player2.choice = classicChoices[getRandomIndex(classicChoices)]
   }
+  return currentGame
 }
 
 function updateGameBoard(){
-  currentGame.draw = false
-  gameBoardChoices = []
-  gameBoardChoices.push(currentGame.player1.choice, currentGame.player2.choice)
+ 
+  currentGame.gameBoard.push(currentGame.player1.choice, currentGame.player2.choice)
+  return currentGame.gameBoard
 }
 
-function checkForWins(gameBoardChoices) {
-  var choice1 = gameBoardChoices[0];
-  var choice2 = gameBoardChoices[1];
+function checkForWins() {
+  var choice1 = currentGame.gameBoard[0]
+  var choice2 = currentGame.gameBoard[1]
 
 if (choice1 === "rock" && (choice2 === "scissors" || choice2 === "lizard")) {
     currentGame.player1.wins +=  1
@@ -80,17 +80,9 @@ if (choice1 === "rock" && (choice2 === "scissors" || choice2 === "lizard")) {
 }
 
 function resetGame(){
-  currentGame;
-  gameBoardChoices = []
   currentGame.player1.choice = null
   currentGame.player2.choice = null
-  currentGame.gameType = null
+  currentGame.gameBoard = []
+  return currentGame
 }
 
-function show(element) {
-  element.classList.remove("hidden");
-}
-
-function hide(element) {
-  element.classList.add("hidden");
-}
