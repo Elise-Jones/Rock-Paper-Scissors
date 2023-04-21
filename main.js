@@ -47,6 +47,7 @@ function catpureChoices(mama){
 }
 
 function updateGameBoard(){
+  currentGame.draw = false
   gameBoardChoices = []
   gameBoardChoices.push(currentGame.player1.choice, currentGame.player2.choice)
 }
@@ -72,7 +73,7 @@ if (choice1 === "rock" && (choice2 === "scissors" || choice2 === "lizard")) {
   } else if (choice1  === "paper" && (choice2 === "scissors" || choice2 === "lizard")){
     currentGame.player2.wins += 1
   } else if (choice1 === choice2){
-    console.log("hello")
+    currentGame.draw = true
   }
 }
 
