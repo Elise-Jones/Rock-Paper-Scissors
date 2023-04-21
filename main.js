@@ -83,4 +83,15 @@ function hello () {
   catpureChoices("rock")
   updateGameBoard()
   checkForWins(gameBoardChoices)
+  setTimeout(refreshGame, 3000)
 }
+
+function refreshGame(){
+  currentGame;
+  console.log("hello")
+  gameBoardChoices = []
+  currentGame.player1.choice = null
+  currentGame.player2.choice = null
+  currentGame.gameType = null
+}
+
