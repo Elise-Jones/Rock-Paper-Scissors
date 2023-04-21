@@ -4,6 +4,7 @@ var advancedChoices = ["rock", "paper", "scissors", "lizard", "alien"];
 var currentGame;
 
 
+
 //UPDATING THE DATA MODEL
 function createPlayer (name, token){
   var player = {
@@ -84,3 +85,4 @@ function resetGame(){
   currentGame.gameBoard = []
   return currentGame
 }
+
