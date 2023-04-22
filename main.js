@@ -2,7 +2,45 @@
 var classicChoices = ["rock", "paper", "scissors"];
 var advancedChoices = ["rock", "paper", "scissors", "lizard", "alien"];
 var currentGame;
+//QUERYSELECTORS
+var mainGameSection = document.querySelector("main")
+var classicGameButtons = document.querySelector(".classic-buttons")
+var difficultGameButtons = document.querySelector(".difficult-buttons")
+var classicContainer = document.querySelector(".classic-container")
+var difficultContainer = document.querySelector(".difficult-container")
+var selectFighter = document.querySelector("h2")
+//EVENT LISTENERS
+mainGameSection.addEventListener('click', function(event){
+showGame(event)
+createGame()
+})
 
+//UPDATING DOM
+function hide(element) {
+  element.classList.add("hidden");
+}
+
+function show(element) {
+  element.classList.remove("hidden");
+}
+
+function showGame(event){
+  var gameChoice = event.target
+console.log(gameChoice.parentNode)
+  if(gameChoice.parentNode.classList == "classic-container"){
+    hide(classicContainer)
+    hide(difficultContainer)
+    show(classicGameButtons)
+    selectFighter.innerText = "Choose your fighter!"
+  } else if(gameChoice.parentNode.classList == 'difficult-container'){
+    hide(classicContainer)
+    hide(difficultContainer)
+    show(classicGameButtons)
+    show(difficultGameButtons)
+    selectFighter.innerText = "Choose your fighter!"
+  }
+  
+}
 
 
 //UPDATING THE DATA MODEL

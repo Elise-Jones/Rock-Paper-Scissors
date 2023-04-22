@@ -65,12 +65,12 @@ body {
   display: flex;
   flex-direction: column;
   height: 600px;
-  width: 400px;
+  width: 0px;
   align-items: center;
   justify-content: space-around;
 }
 
-.button-container {
+/* .button-container {
   display: flex;
   flex-direction: column;
   height: 500px;
@@ -78,7 +78,7 @@ body {
   font-size: 30px;
   background-color: rgb(60, 166, 60);
   align-items: center;
-}
+} */
 
 .classic-buttons {
   display: flex;
@@ -87,7 +87,7 @@ body {
   justify-content: space-around;
 }
 
-.advanced-buttons {
+.difficult-buttons {
   display: flex;
   justify-content: space-around;
   width: 300px;
