@@ -1,18 +1,29 @@
 //VARIABLES
 var classicChoices = ["rock", "paper", "scissors"];
-var advancedChoices = ["rock", "paper", "scissors", "lizard", "alien"];
+// var classicChoices = document.querySelector(".classic-buttons").elements
+var advancedChoices = ["rock", "paper", "scissors", 'alien', "lizard"];
 var currentGame;
+var gameType = null
 //QUERYSELECTORS
 var mainGameSection = document.querySelector("main")
 var classicGameButtons = document.querySelector(".classic-buttons")
 var difficultGameButtons = document.querySelector(".difficult-buttons")
 var classicContainer = document.querySelector(".classic-container")
 var difficultContainer = document.querySelector(".difficult-container")
-var selectFighter = document.querySelector("h2")
+var selectFighter = document.querySelector("h2");
+var buttonContainer = document.querySelector(".button-container");
+var player1Wins = document.querySelector(".player1-wins")
+var player2Wins = document.querySelector(".player2-wins")
+
 //EVENT LISTENERS
+window.addEventListener("load", createGame)
+
 mainGameSection.addEventListener('click', function(event){
+selectGame(event)
 showGame(event)
-createGame()
+capturePlayersChoices(event)
+updateGameBoard(currentGame)
+checkForWins()
 })
 
 //UPDATING DOM
@@ -25,14 +36,15 @@ function show(element) {
 }
 
 function showGame(event){
-  var gameChoice = event.target
-console.log(gameChoice.parentNode)
-  if(gameChoice.parentNode.classList == "classic-container"){
+
+  var gameChoice = event.target.classList.value
+  if(gameChoice === "classic-info"){
     hide(classicContainer)
     hide(difficultContainer)
     show(classicGameButtons)
-    selectFighter.innerText = "Choose your fighter!"
-  } else if(gameChoice.parentNode.classList == 'difficult-container'){
+    selectFighter.innerText = "Choose your fighter"
+  } else if(gameChoice === 'difficult-info'){
+    
     hide(classicContainer)
     hide(difficultContainer)
     show(classicGameButtons)
@@ -59,9 +71,10 @@ function createGame() {
     player1: createPlayer("sun", "🌞"),
     player2: createPlayer("earth", "🌏"),
     gameBoard: [],
-    gameType: null,
+    gameType: gameType,
     draw: false,
   }
+
   return currentGame
 }
 
@@ -70,28 +83,38 @@ function getRandomIndex(array) {
 }
 
 function selectGame(event){
-  if(event === "classic"){
-    currentGame.gameType = classicChoices
-  } else if (event = "advanced"){
+  var gameChoice = event.target.classList.value
+  if(gameChoice === "classic-info"){
+   currentGame.gameType = classicChoices
+  } else if (gameChoice === "difficult-info"){
+
     currentGame.gameType = advancedChoices
   }
+
+  return currentGame
+  
+}
+
+function renderWins(){
+  player1Wins.innerText = `${currentGame.player1.wins}`
+  player2Wins.innerText = `${currentGame.player2.wins}`
 }
 
 function capturePlayersChoices(event){
-  if(currentGame.gameType.includes("lizard")){
-    currentGame.player1.choice = event
+  event.preventDefault()
+  if(currentGame.gameType.toString() == advancedChoices.toString()){
+    currentGame.player1.choice = event.target.id
     currentGame.player2.choice = advancedChoices[getRandomIndex(advancedChoices)]
-  } else {
-    currentGame.player1.choice = event
+  } else  {
+    currentGame.player1.choice = event.target.id
     currentGame.player2.choice = classicChoices[getRandomIndex(classicChoices)]
   }
-  return currentGame
+return currentGame
 }
 
-function updateGameBoard(){
- 
+function updateGameBoard(currentGame){
+  currentGame.gameBoard = []
   currentGame.gameBoard.push(currentGame.player1.choice, currentGame.player2.choice)
-  return currentGame.gameBoard
 }
 
 function checkForWins() {
