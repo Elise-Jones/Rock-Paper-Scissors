@@ -1,7 +1,16 @@
 //VARIABLES
-var classicChoices = ["rock", "paper", "scissors"];
+var classicChoices = [
+  {choicm: "rock",   src:"assets/cave.png"
+} , {playersChoice:"paper",
+src:"assets/happy-paper.png"}, {playersChoice: "scissors",
+src: "assets/happy-scissors.png"}];
+var advancedChoices = [  {choicm: "rock",   src:"assets/cave.png"
+} , {playersChoice:"paper",
+src:"assets/happy-paper.png"}, {playersChoice: "scissors",
+src: "assets/happy-scissors.png"}, {playersChoice: 'alien',
+src: "assets/flat-alien.png"}, {playersChoice: "lizard", src:"assets/lizard.png"}];
 // var classicChoices = document.querySelector(".classic-buttons").elements
-var advancedChoices = ["rock", "paper", "scissors", 'alien', "lizard"];
+// var advancedChoices = ["rock", "paper", "scissors", 'alien', "lizard"];
 var currentGame;
 var gameType = null
 //QUERYSELECTORS
@@ -14,6 +23,8 @@ var selectFighter = document.querySelector("h2");
 var buttonContainer = document.querySelector(".button-container");
 var player1Wins = document.querySelector(".player1-wins")
 var player2Wins = document.querySelector(".player2-wins")
+var displayChoices = document.querySelector(".display-choices")
+var rock = document.getElementById("rock")
 
 //EVENT LISTENERS
 window.addEventListener("load", createGame)
@@ -24,6 +35,8 @@ showGame(event)
 capturePlayersChoices(event)
 updateGameBoard(currentGame)
 checkForWins()
+// displayGameChoices(event)
+
 })
 
 //UPDATING DOM
@@ -55,13 +68,17 @@ function showGame(event){
 }
 
 
+
 //UPDATING THE DATA MODEL
 function createPlayer (name, token){
   var player = {
     name: name,
     token: token,
     wins: 0,
-    choice: null
+    choice: {
+      playersChoice: null,
+      src: null
+    }
   }
   return player;
 }
@@ -101,15 +118,18 @@ function renderWins(){
 }
 
 function capturePlayersChoices(event){
+  console.log(event.target.value)
   event.preventDefault()
   if(currentGame.gameType.toString() == advancedChoices.toString()){
-    currentGame.player1.choice = event.target.id
+    currentGame.player1.choice.playersChoice = event.target.id
+    currentGame.player1.choice.src = event.target.src
     currentGame.player2.choice = advancedChoices[getRandomIndex(advancedChoices)]
   } else  {
-    currentGame.player1.choice = event.target.id
+    currentGame.player1.choice.playersChoice = event.target.id
+    currentGame.player1.choice.src = event.target.src
     currentGame.player2.choice = classicChoices[getRandomIndex(classicChoices)]
   }
-return currentGame
+
 }
 
 function updateGameBoard(currentGame){
@@ -118,8 +138,9 @@ function updateGameBoard(currentGame){
 }
 
 function checkForWins() {
-  var choice1 = currentGame.gameBoard[0]
-  var choice2 = currentGame.gameBoard[1]
+  var choice1 = currentGame.gameBoard[0].playersChoice
+  var choice2 = currentGame.gameBoard[1].playersChoice
+  console.log(choice1)
 
 if (choice1 === "rock" && (choice2 === "scissors" || choice2 === "lizard")) {
     currentGame.player1.wins +=  1
@@ -138,8 +159,25 @@ if (choice1 === "rock" && (choice2 === "scissors" || choice2 === "lizard")) {
   } else if (choice1 === choice2){
     currentGame.draw = true
   }
+  return currentGame
+
+}
+function displayGameChoices(event){
+  if(event.target.id === "rock"){ 
+    renderWins()
+  hide(buttonContainer)
+  show(displayChoices)
 }
 
+}
+function renderWins(){
+  console.log(currentGame.player2.choice.src)
+  displayChoices.innerHTML = `
+  <div class="display-choices">
+  <img id="${currentGame.player1.choice.playersChoice}" src="${currentGame.player1.choice.src}" alt="animated cave">
+  <img id="${currentGame.player2.choice.playersChoice}" src="${currentGame.player2.choice.choicem.src}" alt="animated cave">
+</div>`
+}
 function resetGame(){
   currentGame.player1.choice = null
   currentGame.player2.choice = null
