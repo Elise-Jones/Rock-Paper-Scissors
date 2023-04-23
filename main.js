@@ -35,7 +35,7 @@ showGame(event)
 capturePlayersChoices(event)
 updateGameBoard(currentGame)
 checkForWins()
-// displayGameChoices(event)
+displayGameChoices(event)
 
 })
 
@@ -112,10 +112,10 @@ function selectGame(event){
   
 }
 
-function renderWins(){
-  player1Wins.innerText = `${currentGame.player1.wins}`
-  player2Wins.innerText = `${currentGame.player2.wins}`
-}
+// function renderWins(){
+//   player1Wins.innerText = `${currentGame.player1.wins}`
+//   player2Wins.innerText = `${currentGame.player2.wins}`
+// }
 
 function capturePlayersChoices(event){
   console.log(event.target.value)
@@ -163,8 +163,25 @@ if (choice1 === "rock" && (choice2 === "scissors" || choice2 === "lizard")) {
 
 }
 function displayGameChoices(event){
-  if(event.target.id === "rock"){ 
+  var mama = event.target.id
+  if( mama === "rock"){ 
     renderWins()
+  hide(buttonContainer)
+  show(displayChoices)
+} else if(mama ==="scissors") {
+  renderWins()
+  hide(buttonContainer)
+  show(displayChoices)
+} else if (mama === "paper"){
+  renderWins()
+  hide(buttonContainer)
+  show(displayChoices)
+} else if (mama === "lizard") {
+  renderWins()
+  hide(buttonContainer)
+  show(displayChoices)
+} else if ( mama === "alien") {
+  renderWins()
   hide(buttonContainer)
   show(displayChoices)
 }
@@ -175,13 +192,13 @@ function renderWins(){
   displayChoices.innerHTML = `
   <div class="display-choices">
   <img id="${currentGame.player1.choice.playersChoice}" src="${currentGame.player1.choice.src}" alt="animated cave">
-  <img id="${currentGame.player2.choice.playersChoice}" src="${currentGame.player2.choice.choicem.src}" alt="animated cave">
+  <img id="${currentGame.player2.choice.playersChoice}" src="${currentGame.player2.choice.src}" alt="animated cave">
 </div>`
 }
-function resetGame(){
-  currentGame.player1.choice = null
-  currentGame.player2.choice = null
-  currentGame.gameBoard = []
-  return currentGame
-}
+// function resetGame(){
+//   currentGame.player1.choice = null
+//   currentGame.player2.choice = null
+//   currentGame.gameBoard = []
+//   return currentGame
+// }
 
