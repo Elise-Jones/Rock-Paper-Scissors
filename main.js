@@ -1,16 +1,19 @@
 //VARIABLES
 var classicChoices = [
-  {playersChoice: "rock",   src:"assets/cave.png"
-} , {playersChoice:"paper",
-src:"assets/happy-paper.png"}, {playersChoice: "scissors",
+  {
+    playersChoice: "rock",   
+    src:"assets/cave.png"
+  }, 
+  {playersChoice:"paper",
+  src:"assets/happy-paper.png"
+}, {playersChoice: "scissors",
 src: "assets/happy-scissors.png"}];
 var advancedChoices = [  {playersChoice: "rock",   src:"assets/cave.png"
 } , {playersChoice:"paper",
 src:"assets/happy-paper.png"}, {playersChoice: "scissors",
 src: "assets/happy-scissors.png"}, {playersChoice: 'alien',
 src: "assets/flat-alien.png"}, {playersChoice: "lizard", src:"assets/lizard.png"}];
-// var classicChoices = document.querySelector(".classic-buttons").elements
-// var advancedChoices = ["rock", "paper", "scissors", 'alien', "lizard"];
+
 var currentGame;
 var gameType = null
 //QUERYSELECTORS
@@ -32,7 +35,6 @@ window.addEventListener("load", createGame)
 gameSelectorSection.addEventListener("click", function(event){
   selectGame(event)
   showGame(event)
-  
 })
 
 buttonContainer.addEventListener("click", function(event){
@@ -41,20 +43,7 @@ buttonContainer.addEventListener("click", function(event){
   checkForWins()
   displayGameChoices(event)
   setTimeout(resetGame, 3000)
-
 })
-// mainGameSection.addEventListener('click', function(event){
-
-// 
-// 
-// 
-// 
-// 
-// 
-// setTimeout(resetGame, 2000)
-
-
-// })
 
 //UPDATING DOM
 function hide(element) {
@@ -81,10 +70,7 @@ function showGame(event){
     show(difficultGameButtons)
     selectFighter.innerText = "Choose your fighter!"
   }
-  
 }
-
-
 
 //UPDATING THE DATA MODEL
 function createPlayer (name, token){
@@ -108,7 +94,6 @@ function createGame() {
     gameType: gameType,
     draw: false,
   }
-
   return currentGame
 }
 
@@ -123,19 +108,15 @@ function selectGame(event){
   } else if (gameChoice === "difficult-info"){
     currentGame.gameType = advancedChoices
   }
-console.log("selectGame")
   return currentGame
-  
 }
 
 function showWinCount(){
   player1Wins.innerText = `Wins: ${currentGame.player1.wins}`
   player2Wins.innerText = `Wins: ${currentGame.player2.wins}`
-  console.log("showWINCOUNT")
 }
 
 function capturePlayersChoices(event){
-  console.log(event.target.value)
   event.preventDefault()
   if(currentGame.gameType.toString() == advancedChoices.toString()){
     currentGame.player1.choice.playersChoice = event.target.id
@@ -158,8 +139,6 @@ function updateGameBoard(currentGame){
 function checkForWins() {
   var choice1 = currentGame.gameBoard[0].playersChoice
   var choice2 = currentGame.gameBoard[1].playersChoice
-  console.log("player1choice", choice1)
-  console.log("player2choice", choice2)
 
 if (choice1 === "rock" && (choice2 === "scissors" || choice2 === "lizard")) {
     selectFighter.innerText = "Sun won this round!"
@@ -194,49 +173,44 @@ if (choice1 === "rock" && (choice2 === "scissors" || choice2 === "lizard")) {
   } else if (choice1 === choice2){
     currentGame.draw = true
   }
-  console.log("cheforwins")
+
   return currentGame
 }
 
 function displayGameChoices(event){
   var mama = event.target.id
-  if( mama === "rock"){ 
-  renderWins()
-  showWinCount()
-  hide(classicGameButtons)
-  hide(difficultGameButtons)
-  show(displayChoices)
-} else if(mama ==="scissors") {
-  renderWins()
-  showWinCount()
-  hide(classicGameButtons)
-  hide(difficultGameButtons)
-  show(displayChoices)
-} else if (mama === "paper"){
-  hide(classicGameButtons)
-  renderWins()
-  showWinCount()
-  hide(classicGameButtons)
-  hide(difficultGameButtons)
-  show(displayChoices)
-} else if (mama === "lizard") {
-  renderWins()
-  showWinCount()
-  hide(classicGameButtons)
-  hide(difficultGameButtons)
-  show(displayChoices)
-} else if (mama === "alien") {
-  renderWins()
-  showWinCount()
-  hide(classicGameButtons)
-  hide(difficultGameButtons)
-  show(displayChoices)
-// } else if (mama === mama){
-//   selectFighter.innerText = "It's a draw"
-// }
-console.log("display Game")
-}
-
+  if( mama === "rock") { 
+    renderWins()
+    showWinCount()
+    hide(classicGameButtons)
+    hide(difficultGameButtons)
+    show(displayChoices)
+  } else if(mama ==="scissors") {
+    renderWins()
+    showWinCount()
+    hide(classicGameButtons)
+    hide(difficultGameButtons)
+    show(displayChoices)
+  } else if (mama === "paper") {
+    hide(classicGameButtons)
+    renderWins()
+    showWinCount()
+    hide(classicGameButtons)
+    hide(difficultGameButtons)
+    show(displayChoices)
+  } else if (mama === "lizard") {
+    renderWins()
+    showWinCount()
+    hide(classicGameButtons)
+    hide(difficultGameButtons)
+    show(displayChoices)
+  } else if (mama === "alien") {
+    renderWins()
+    showWinCount()
+    hide(classicGameButtons)
+    hide(difficultGameButtons)
+    show(displayChoices)
+  }
 
 }
 
@@ -247,7 +221,6 @@ function checkForDraw(){
 }
 
 function renderWins(){
-  console.log(currentGame.player2.choice.src)
   displayChoices.innerHTML = `
   <img id="${currentGame.player1.choice.playersChoice}" src="${currentGame.player1.choice.src}" alt="animated cave">
   <img id="${currentGame.player2.choice.playersChoice}" src="${currentGame.player2.choice.src}" alt="animated cave">
@@ -255,12 +228,11 @@ function renderWins(){
 }
 
 function refresh(){
-  if(currentGame.gameType.length === 3){
+  if(currentGame.gameType.length === 3) {
     show(classicGameButtons)
     hide(displayChoices)
     selectFighter.innerText = "Choose your fighter!"
-    
-  } else if (currentGame.gameType.length === 5){
+  } else if (currentGame.gameType.length === 5) {
     show(classicGameButtons)
     show(difficultGameButtons)
     hide(displayChoices)
@@ -278,7 +250,6 @@ function resetGame(){
     src: null
   }
   currentGame.gameBoard = []
-
   refresh()
 }
 
