@@ -28,7 +28,9 @@ var player1Wins = document.querySelector(".player1-wins")
 var player2Wins = document.querySelector(".player2-wins")
 var displayChoices = document.querySelector(".display-choices")
 var rock = document.getElementById("rock")
-var gameSelectorSection = document.querySelector(".game-selector")
+var gameSelectorSection = document.querySelector(".game-selector");
+var changeGameButton = document.querySelector(".change-game-button");
+var gameholder = document.querySelector(".game-holder")
 
 //EVENT LISTENERS
 window.addEventListener("load", createGame)
@@ -43,7 +45,14 @@ buttonContainer.addEventListener("click", function(event){
   checkForWins()
   checkForDraw()
   displayGameChoices(event)
-  setTimeout(resetGame, 3000)
+  setTimeout(resetGame, 1000)
+})
+
+changeGameButton.addEventListener('click', function(){
+  hide(difficultContainer)
+  hide(classicGameButtons)
+  show(difficultContainer)
+  show(classicContainer)
 })
 
 //UPDATING DOM
@@ -252,5 +261,6 @@ function resetGame(){
   }
   currentGame.gameBoard = []
   refresh()
+  show(changeGameButton)
 }
 
