@@ -74,7 +74,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 500px;
-  width: 500px;
+  width: 0px;
   font-size: 30px;
   background-color: rgb(60, 166, 60);
   align-items: center;
@@ -97,6 +97,7 @@ body {
 button {
   background-color: rgb(60, 166, 60);
   border: none; 
+  width: 200px;
   cursor: pointer;
 }
 
@@ -110,7 +111,7 @@ main {
 }
 
 img { 
-  width: 100px;
+  width: 200px;
   height: 150px;
 }
 
