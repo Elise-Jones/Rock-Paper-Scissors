@@ -41,6 +41,7 @@ buttonContainer.addEventListener("click", function(event){
   capturePlayersChoices(event)
   updateGameBoard(currentGame)
   checkForWins()
+  checkForDraw()
   displayGameChoices(event)
   setTimeout(resetGame, 3000)
 })
