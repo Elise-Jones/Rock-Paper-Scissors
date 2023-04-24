@@ -128,3 +128,9 @@ header {
   width: 300px;
   font-size: 30px
 }
+.change-game-button {
+  background-color: rgb(60, 166, 60);
+  height: 40px;
+  border-radius: 10px;
+  font-size: 20px;
+}

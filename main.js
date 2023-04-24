@@ -53,6 +53,7 @@ changeGameButton.addEventListener('click', function(){
   hide(classicGameButtons)
   show(difficultContainer)
   show(classicContainer)
+  hide(changeGameButton)
 })
 
 //UPDATING DOM
