@@ -49,11 +49,14 @@ buttonContainer.addEventListener("click", function(event){
 })
 
 changeGameButton.addEventListener('click', function(){
-  hide(difficultContainer)
-  hide(classicGameButtons)
-  show(difficultContainer)
-  show(classicContainer)
+  // hide(difficultContainer)
+  // hide(classicGameButtons)
+  // show(difficultContainer)
+  // show(classicContainer)
+  show(gameSelectorSection)
+  hide(buttonContainer)
   hide(changeGameButton)
+  selectFighter.innerText = "Choose your Game!"
 })
 
 //UPDATING DOM
@@ -66,19 +69,17 @@ function show(element) {
 }
 
 function showGame(event){
-
   var gameChoice = event.target.classList.value
   if(gameChoice === "classic-info"){
-    hide(classicContainer)
-    hide(difficultContainer)
+    hide(gameSelectorSection)
+    show(buttonContainer)
     show(classicGameButtons)
     selectFighter.innerText = "Choose your fighter"
   } else if(gameChoice === 'difficult-info'){
-    
-    hide(classicContainer)
-    hide(difficultContainer)
+    hide(gameSelectorSection)
     show(classicGameButtons)
     show(difficultGameButtons)
+    show(buttonContainer)
     selectFighter.innerText = "Choose your fighter!"
   }
 }
@@ -119,6 +120,7 @@ function selectGame(event){
   } else if (gameChoice === "difficult-info"){
     currentGame.gameType = advancedChoices
   }
+  console.log(gameChoice)
   return currentGame
 }
 
@@ -222,7 +224,6 @@ function displayGameChoices(event){
     hide(difficultGameButtons)
     show(displayChoices)
   }
-
 }
 
 function checkForDraw(){
@@ -246,6 +247,7 @@ function refresh(){
   } else if (currentGame.gameType.length === 5) {
     show(classicGameButtons)
     show(difficultGameButtons)
+    show(buttonContainer)
     hide(displayChoices)
     selectFighter.innerText = "Choose your fighter!"
   }
@@ -261,6 +263,7 @@ function resetGame(){
     src: null
   }
   currentGame.gameBoard = []
+  currentGame.draw = false
   refresh()
   show(changeGameButton)
 }
