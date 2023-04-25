@@ -158,7 +158,7 @@ function displayPlayerChoices(event){
     hide(classicGameButtons)
     hide(difficultGameButtons)
     show(displayChoices)
-  } else if(imageIcon ==="scissors") {
+  } else if(imageIcon === "scissors") {
     renderPlayersChoices()
     renderTotalWins()
     hide(classicGameButtons)
@@ -219,8 +219,9 @@ function displayGameIcons(event){
   var gameChoice = event.target.classList.value
   if(gameChoice === "classic-info"){
     hide(gameSelectorSection)
-    show(buttonContainer)
     show(classicGameButtons)
+    hide(difficultGameButtons)
+    show(buttonContainer)
     selectFighter.innerText = "Choose your fighter!"
   } else if(gameChoice === 'difficult-info'){
     hide(gameSelectorSection)
@@ -246,6 +247,7 @@ function renderPlayersChoices(){
 function renderSameGameDifficulty(){
   if(currentGame.gameType.length === 3) {
     show(classicGameButtons)
+    hide(difficultGameButtons)
     hide(displayChoices)
     selectFighter.innerText = "Choose your fighter!"
   } else if (currentGame.gameType.length === 5) {
