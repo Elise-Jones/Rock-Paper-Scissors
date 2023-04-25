@@ -84,7 +84,6 @@ function getRandomIndex(array) {
 function selectGameDifficulty(event){
   var gameDifficultyChoice = event.target.classList.value
   if(gameDifficultyChoice === "classic-info"){
-    console.log("hello")
    currentGame.gameType = classicChoices
   } else if (gameDifficultyChoice === "difficult-info"){
     currentGame.gameType = advancedChoices
@@ -246,7 +245,6 @@ function renderPlayersChoices(){
 }
 
 function renderSameGameDifficulty(){
-  console.log(currentGame.gameType.length === 3)
   if(currentGame.gameType.length === 3) {
     show(classicGameButtons)
     hide(difficultGameButtons)
