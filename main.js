@@ -84,6 +84,7 @@ function getRandomIndex(array) {
 function selectGameDifficulty(event){
   var gameDifficultyChoice = event.target.classList.value
   if(gameDifficultyChoice === "classic-info"){
+    console.log("hello")
    currentGame.gameType = classicChoices
   } else if (gameDifficultyChoice === "difficult-info"){
     currentGame.gameType = advancedChoices
@@ -158,7 +159,7 @@ function displayPlayerChoices(event){
     hide(classicGameButtons)
     hide(difficultGameButtons)
     show(displayChoices)
-  } else if(imageIcon ==="scissors") {
+  } else if(imageIcon === "scissors") {
     renderPlayersChoices()
     renderTotalWins()
     hide(classicGameButtons)
@@ -219,8 +220,9 @@ function displayGameIcons(event){
   var gameChoice = event.target.classList.value
   if(gameChoice === "classic-info"){
     hide(gameSelectorSection)
-    show(buttonContainer)
     show(classicGameButtons)
+    hide(difficultGameButtons)
+    show(buttonContainer)
     selectFighter.innerText = "Choose your fighter!"
   } else if(gameChoice === 'difficult-info'){
     hide(gameSelectorSection)
@@ -244,8 +246,10 @@ function renderPlayersChoices(){
 }
 
 function renderSameGameDifficulty(){
+  console.log(currentGame.gameType.length === 3)
   if(currentGame.gameType.length === 3) {
     show(classicGameButtons)
+    hide(difficultGameButtons)
     hide(displayChoices)
     selectFighter.innerText = "Choose your fighter!"
   } else if (currentGame.gameType.length === 5) {
