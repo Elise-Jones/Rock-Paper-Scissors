@@ -1,42 +1,39 @@
 //VARIABLES
-var classicChoices = [
-  {
-    playersChoice: "rock",   
-    src:"assets/cave.png"
-  }, 
-  {playersChoice:"paper",
-  src:"assets/happy-paper.png"
-}, {playersChoice: "scissors",
-src: "assets/happy-scissors.png"}];
-var advancedChoices = [  {playersChoice: "rock",   src:"assets/cave.png"
-} , {playersChoice:"paper",
-src:"assets/happy-paper.png"}, {playersChoice: "scissors",
-src: "assets/happy-scissors.png"}, {playersChoice: 'alien',
-src: "assets/flat-alien.png"}, {playersChoice: "lizard", src:"assets/lizard.png"}];
-
 var currentGame;
 var gameType = null
-//QUERYSELECTORS
+var classicChoices = [
+  {playersChoice: "rock", src:"assets/cave.png"}, 
+  {playersChoice:"paper",src:"assets/happy-paper.png"},
+  {playersChoice: "scissors", src: "assets/happy-scissors.png"}
+];
+var advancedChoices = [  
+  {playersChoice: "rock",  src: "assets/cave.png"}, 
+  {playersChoice:"paper", src: "assets/happy-paper.png"}, 
+  {playersChoice: "scissors", src: "assets/happy-scissors.png"}, 
+  {playersChoice: 'alien', src: "assets/flat-alien.png"}, 
+  {playersChoice: "lizard", src:"assets/lizard.png"}
+];
+
 var mainGameSection = document.querySelector("main")
 var classicGameButtons = document.querySelector(".classic-buttons")
 var difficultGameButtons = document.querySelector(".difficult-buttons")
 var classicContainer = document.querySelector(".classic-container")
 var difficultContainer = document.querySelector(".difficult-container")
-var selectFighter = document.querySelector("h2");
-var buttonContainer = document.querySelector(".button-container");
+var selectFighter = document.querySelector("h2")
+var buttonContainer = document.querySelector(".button-container")
 var player1Wins = document.querySelector(".player1-wins")
 var player2Wins = document.querySelector(".player2-wins")
 var displayChoices = document.querySelector(".display-choices")
-var rock = document.getElementById("rock")
-var gameSelectorSection = document.querySelector(".game-selector");
-var changeGameButton = document.querySelector(".change-game-button");
+var gameSelectorSection = document.querySelector(".game-selector")
+var changeGameButton = document.querySelector(".change-game-button")
 var gameholder = document.querySelector(".game-holder")
 
 //EVENT LISTENERS
 window.addEventListener("load", createGame)
 gameSelectorSection.addEventListener("click", function(event){
-  selectGame(event)
-  showGame(event)
+  selectGameDifficulty(event)
+  displayGameIcons(event)
+  hide(changeGameButton)
 })
 
 buttonContainer.addEventListener("click", function(event){
@@ -44,47 +41,18 @@ buttonContainer.addEventListener("click", function(event){
   updateGameBoard(currentGame)
   checkForWins()
   checkForDraw()
-  displayGameChoices(event)
+  displayPlayerChoices(event)
   setTimeout(resetGame, 1000)
 })
 
 changeGameButton.addEventListener('click', function(){
-  // hide(difficultContainer)
-  // hide(classicGameButtons)
-  // show(difficultContainer)
-  // show(classicContainer)
   show(gameSelectorSection)
   hide(buttonContainer)
   hide(changeGameButton)
   selectFighter.innerText = "Choose your Game!"
 })
 
-//UPDATING DOM
-function hide(element) {
-  element.classList.add("hidden");
-}
-
-function show(element) {
-  element.classList.remove("hidden");
-}
-
-function showGame(event){
-  var gameChoice = event.target.classList.value
-  if(gameChoice === "classic-info"){
-    hide(gameSelectorSection)
-    show(buttonContainer)
-    show(classicGameButtons)
-    selectFighter.innerText = "Choose your fighter"
-  } else if(gameChoice === 'difficult-info'){
-    hide(gameSelectorSection)
-    show(classicGameButtons)
-    show(difficultGameButtons)
-    show(buttonContainer)
-    selectFighter.innerText = "Choose your fighter!"
-  }
-}
-
-//UPDATING THE DATA MODEL
+//FUNCTIONS
 function createPlayer (name, token){
   var player = {
     name: name,
@@ -95,7 +63,7 @@ function createPlayer (name, token){
       src: null
     }
   }
-  return player;
+  return player
 }
 
 function createGame() {
@@ -113,20 +81,14 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
-function selectGame(event){
-  var gameChoice = event.target.classList.value
-  if(gameChoice === "classic-info"){
+function selectGameDifficulty(event){
+  var gameDifficultyChoice = event.target.classList.value
+  if(gameDifficultyChoice === "classic-info"){
    currentGame.gameType = classicChoices
-  } else if (gameChoice === "difficult-info"){
+  } else if (gameDifficultyChoice === "difficult-info"){
     currentGame.gameType = advancedChoices
   }
-  console.log(gameChoice)
   return currentGame
-}
-
-function showWinCount(){
-  player1Wins.innerText = `Wins: ${currentGame.player1.wins}`
-  player2Wins.innerText = `Wins: ${currentGame.player2.wins}`
 }
 
 function capturePlayersChoices(event){
@@ -140,13 +102,11 @@ function capturePlayersChoices(event){
     currentGame.player1.choice.src = event.target.src
     currentGame.player2.choice = classicChoices[getRandomIndex(classicChoices)]
   }
-  console.log("captureplayerschocies")
 }
 
 function updateGameBoard(currentGame){
   currentGame.gameBoard = []
   currentGame.gameBoard.push(currentGame.player1.choice, currentGame.player2.choice)
-  console.log("updategameboard")
 }
 
 function checkForWins() {
@@ -190,36 +150,36 @@ if (choice1 === "rock" && (choice2 === "scissors" || choice2 === "lizard")) {
   return currentGame
 }
 
-function displayGameChoices(event){
-  var mama = event.target.id
-  if( mama === "rock") { 
-    renderWins()
-    showWinCount()
+function displayPlayerChoices(event){
+  var imageIcon = event.target.id
+  if( imageIcon === "rock") { 
+    renderPlayersChoices()
+    renderTotalWins()
     hide(classicGameButtons)
     hide(difficultGameButtons)
     show(displayChoices)
-  } else if(mama ==="scissors") {
-    renderWins()
-    showWinCount()
+  } else if(imageIcon ==="scissors") {
+    renderPlayersChoices()
+    renderTotalWins()
     hide(classicGameButtons)
     hide(difficultGameButtons)
     show(displayChoices)
-  } else if (mama === "paper") {
+  } else if (imageIcon === "paper") {
     hide(classicGameButtons)
-    renderWins()
-    showWinCount()
-    hide(classicGameButtons)
-    hide(difficultGameButtons)
-    show(displayChoices)
-  } else if (mama === "lizard") {
-    renderWins()
-    showWinCount()
+    renderPlayersChoices()
+    renderTotalWins()
     hide(classicGameButtons)
     hide(difficultGameButtons)
     show(displayChoices)
-  } else if (mama === "alien") {
-    renderWins()
-    showWinCount()
+  } else if (imageIcon === "lizard") {
+    renderPlayersChoices()
+    renderTotalWins()
+    hide(classicGameButtons)
+    hide(difficultGameButtons)
+    show(displayChoices)
+  } else if (imageIcon === "alien") {
+    renderPlayersChoices()
+    renderTotalWins()
     hide(classicGameButtons)
     hide(difficultGameButtons)
     show(displayChoices)
@@ -229,27 +189,6 @@ function displayGameChoices(event){
 function checkForDraw(){
   if (currentGame.draw === true){
     selectFighter.innerText = "It's a draw"
-  }
-}
-
-function renderWins(){
-  displayChoices.innerHTML = `
-  <img id="${currentGame.player1.choice.playersChoice}" src="${currentGame.player1.choice.src}" alt="animated cave">
-  <img id="${currentGame.player2.choice.playersChoice}" src="${currentGame.player2.choice.src}" alt="animated cave">
-  `
-}
-
-function refresh(){
-  if(currentGame.gameType.length === 3) {
-    show(classicGameButtons)
-    hide(displayChoices)
-    selectFighter.innerText = "Choose your fighter!"
-  } else if (currentGame.gameType.length === 5) {
-    show(classicGameButtons)
-    show(difficultGameButtons)
-    show(buttonContainer)
-    hide(displayChoices)
-    selectFighter.innerText = "Choose your fighter!"
   }
 }
 
@@ -264,7 +203,56 @@ function resetGame(){
   }
   currentGame.gameBoard = []
   currentGame.draw = false
-  refresh()
+  renderSameGameDifficulty()
   show(changeGameButton)
 }
 
+function hide(element) {
+  element.classList.add("hidden")
+}
+
+function show(element) {
+  element.classList.remove("hidden")
+}
+
+function displayGameIcons(event){
+  var gameChoice = event.target.classList.value
+  if(gameChoice === "classic-info"){
+    hide(gameSelectorSection)
+    show(buttonContainer)
+    show(classicGameButtons)
+    selectFighter.innerText = "Choose your fighter!"
+  } else if(gameChoice === 'difficult-info'){
+    hide(gameSelectorSection)
+    show(classicGameButtons)
+    show(difficultGameButtons)
+    show(buttonContainer)
+    selectFighter.innerText = "Choose your fighter!"
+  }
+}
+
+function renderTotalWins(){
+  player1Wins.innerText = `Wins: ${currentGame.player1.wins}`
+  player2Wins.innerText = `Wins: ${currentGame.player2.wins}`
+}
+
+function renderPlayersChoices(){
+  displayChoices.innerHTML = `
+  <img id="${currentGame.player1.choice.playersChoice}" src="${currentGame.player1.choice.src}" alt="animated cave">
+  <img id="${currentGame.player2.choice.playersChoice}" src="${currentGame.player2.choice.src}" alt="animated cave">
+  `
+}
+
+function renderSameGameDifficulty(){
+  if(currentGame.gameType.length === 3) {
+    show(classicGameButtons)
+    hide(displayChoices)
+    selectFighter.innerText = "Choose your fighter!"
+  } else if (currentGame.gameType.length === 5) {
+    show(classicGameButtons)
+    show(difficultGameButtons)
+    show(buttonContainer)
+    hide(displayChoices)
+    selectFighter.innerText = "Choose your fighter!"
+  }
+}
